@@ -32,7 +32,11 @@ class FetchStrategy:
             logger.exception(f"An error has occurred: {e}")
 
 #CLASS DEFINITION ParseData
-
+#Found the table
+#Extracted rows
+#Checked that rows have the correct number of cells
+# Extract text from cells
+# Convert data into pandas Dataframes
 class ParseData:
     def __init__(self,response, columns=None, selector=None, soup=None):
         self.response = response
@@ -56,8 +60,26 @@ class ParseData:
         for row in rows:
             cells = row.find_all('td')
             if not cells or len(cells) != len(self.columns):
+                logger.info(f"Row has {len(cells)} cells. Expected {len(self.columns)}")
                 continue
-        
+            data.append([cell.get_text(strip=True) for cell in cells]) #Extract and process data from HTML into the data list
+
+            if not data: # Error logging for no data
+                logger.error("No data found")
+                return None
+            
+        df=pd.Dataframe(data, columns=self.columns) #Create panda Dataframe from extracted and processed HTML data
+        logger.info(f"Dataframe created with {len(df.shape[0])}")
+        return df
+
+#CLASS DEFINITION DataFormatter
+#Ensure the data types are correct 
+#Handle missing values or outliers
+#Convert any necessary columns 
+#Optionally, normalize/scale data if needed
+class DataFormatter:
+    def __innit__(self,df):
+        self.df = df
 
     
 
