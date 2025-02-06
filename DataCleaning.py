@@ -1,3 +1,7 @@
+import pandas as pd
+import numpy as np
+import logging
+
 #CLASS DEFINITION DataFormatter
 #Ensure the data types are correct 
 #Handle missing values or outliers

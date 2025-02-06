@@ -3,9 +3,6 @@ from bs4 import BeautifulSoup as bs
 import pandas as pd
 import logging
 
-def main():
-    logger.info('Script started')
-
 
 logger = logging.getLogger(__name__)
 # CLASS DEFINITION: FetchData
