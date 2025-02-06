@@ -1,10 +1,9 @@
 import requests 
 from bs4 import BeautifulSoup as bs
 import pandas as pd
-import logging
+from LoggerConfig import logger
 
 
-logger = logging.getLogger(__name__)
 # CLASS DEFINITION: FetchData
 #Initialize the class with base_url and timeout.
 #Dynamically pass endpoint to the fetch_data method.
@@ -32,8 +31,8 @@ class FetchStrategy:
 #Found the table
 #Extracted rows
 #Checked that rows have the correct number of cells
-# Extract text from cells
-# Convert data into pandas Dataframes
+#Extract text from cells
+#Convert data into pandas Dataframes
 class ParseData:
     def __init__(self,response, columns=None, selector=None, soup=None):
         self.response = response
@@ -73,11 +72,4 @@ class ParseData:
         logger.info(f"Dataframe created with {len(df.shape[0])}")
         return df
 
-
-
-#CLASS DEFIINITION 
-if __name__ == '__main__':
-    main()
-    logging.getLogger(__name__)
-    logging.setLevel(logging.DEBUG)
     

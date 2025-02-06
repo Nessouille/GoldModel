@@ -1,7 +1,7 @@
-import requests 
-from bs4 import BeautifulSoup as bs
-import pandas as pd
+import DataCleaning as clean
+import DataFetching as fetch
 from LoggerConfig import logger
+import Model
 
 def main():
     logger.info('Script started')
