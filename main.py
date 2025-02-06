@@ -51,7 +51,10 @@ class ParseData:
             return None
         logger.info("Table found")
 
+        #Extract rows from table
         rows = table.find_all('tr')
+
+        #Error logging for no rows
         if not rows:
             logger.error("No rows found")
             return None
@@ -63,8 +66,9 @@ class ParseData:
                 logger.info(f"Row has {len(cells)} cells. Expected {len(self.columns)}")
                 continue
             data.append([cell.get_text(strip=True) for cell in cells]) #Extract and process data from HTML into the data list
-
-            if not data: # Error logging for no data
+            
+            # Error logging for no data
+            if not data: 
                 logger.error("No data found")
                 return None
             
@@ -80,6 +84,37 @@ class ParseData:
 class DataFormatter:
     def __innit__(self,df):
         self.df = df
+    
+    def clean_data(self):
+        logger.info("Cleaning data: start")
+        #date to datetime converion, if not possible set date to NaT (Not a time)
+        self.df['Date'] = pd.to_datetime(self.df['Date'], errors = 'coerce') 
+        #All other numerical columns are converted to numeric, if not possible convert to NaN
+        for col in ['Close', 'Open', 'Volume', 'High', 'Low']
+            self.df[col] = pd.to_numeric(self.df[col], errors = 'coece')
+        
+        #Implemant data manipulation strategies
+        #Forward fill (carry over in time series)
+        self.df.fillna(methods='ffill', inplace ='True')
+
+        #Backward fill first row if missing data
+        self.df.fillna(methods = 'bfill', max = 1, inplace ='True')
+
+        #Linear interpolation of large gaps in data 
+        self.df.interpolate(methods = 'linear', interpolate = 'True')
+
+        #Handle large data gaps (more than 5 missign values in a row) with a median interpollation
+        if self.df['Close'].isna().sum() > 5:
+            self.df['Close'] = self.df['Close'].fillna(self.df['Close'].median(), inplace = 'True')
+        
+        logger.info("Cleaning data: complete")
+
+        return self.df
+
+
+
+
+
 
     
 
