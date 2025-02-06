@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-import logging
+from LoggerConfig import logger
 
 #CLASS DEFINITION DataFormatter
 #Ensure the data types are correct 
@@ -36,3 +36,14 @@ class DataFormatter:
         logger.info("Cleaning data: complete")
 
         return self.df
+    
+#CLASS DEFINITION DataPreprocess
+#Handle outliers
+#Scale data
+#Feature selection
+#Split data in trainning and testing sets
+#Create data sets with raw data, feature selected data, and outlier removed data
+#Data should be ready to be handled by any supervised or unsupervised learning algorythm in Model.py
+class DataPreprocess:
+    def __innit__(self,df):
+        self.df = df

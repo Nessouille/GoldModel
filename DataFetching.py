@@ -55,6 +55,7 @@ class ParseData:
             logger.error("No rows found")
             return None
         logger.info("Rows found")
+        #Create empty list Data
         data = []
         for row in rows:
             cells = row.find_all('td')
