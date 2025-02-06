@@ -90,7 +90,7 @@ class DataFormatter:
         #date to datetime converion, if not possible set date to NaT (Not a time)
         self.df['Date'] = pd.to_datetime(self.df['Date'], errors = 'coerce') 
         #All other numerical columns are converted to numeric, if not possible convert to NaN
-        for col in ['Close', 'Open', 'Volume', 'High', 'Low']
+        for col in ['Close', 'Open', 'Volume', 'High', 'Low']:
             self.df[col] = pd.to_numeric(self.df[col], errors = 'coece')
         
         #Implemant data manipulation strategies
@@ -111,13 +111,7 @@ class DataFormatter:
 
         return self.df
 
-
-
-
-
-
-    
-
+#CLASS DEFIINITION 
 if __name__ == '__main__':
     main()
     logging.getLogger(__name__)
