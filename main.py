@@ -91,7 +91,7 @@ class DataFormatter:
         self.df['Date'] = pd.to_datetime(self.df['Date'], errors = 'coerce') 
         #All other numerical columns are converted to numeric, if not possible convert to NaN
         for col in ['Close', 'Open', 'Volume', 'High', 'Low']:
-            self.df[col] = pd.to_numeric(self.df[col], errors = 'coece')
+            self.df[col] = pd.to_numeric(self.df[col], errors = 'coerce')
         
         #Implemant data manipulation strategies
         #Forward fill (carry over in time series)
